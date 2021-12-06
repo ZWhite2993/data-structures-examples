@@ -33,6 +33,7 @@ function LinkedList() {
     console.log(this.head.value);
   }
 
+  //Adds value to end of list
   this.push = function(value) {
     let currentNode = this.head;
     while(currentNode.next) {
@@ -42,13 +43,15 @@ function LinkedList() {
     this.size++;
   }
 
+  //Removes value from end of list
   this.pop = function() {
     let currentNode = this.head;
     while(currentNode.next.next) {
       currentNode = currentNode.next;
     } 
-    console.log(currentNode.next)
+    console.log(currentNode.next);
     currentNode.next = null;  
+    this.size--;
   }
   
   //Inspects and returns the items in the list
