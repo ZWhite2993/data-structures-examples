@@ -6,7 +6,10 @@ function Node(value) {
 
 function LinkedList() {
   this.head = null;
-  this.add = function(value) {
+  this.size = 0;
+  
+  //Adds value to the front of the list
+  this.unshift = function(value) {
     let node = new Node(value);
     if (!this.head) {
       this.head = node;
@@ -15,14 +18,49 @@ function LinkedList() {
       this.head = node;
     }
     this.size++;
+    return this;
   };
+
+  //Removes value from front of the list
+  this.shift = function() {
+    let headNode = this.head;
+    if(headNode) {
+      this.head = headNode.next;
+    } else {
+      return null;
+    }
+    this.size--;
+    console.log(this.head.value);
+  }
+
+  this.push = function(value) {
+    let currentNode = this.head;
+    while(currentNode.next) {
+      currentNode = currentNode.next;
+    } 
+    currentNode.next = new Node(value);
+    this.size++;
+  }
+
+  this.pop = function() {
+    let currentNode = this.head;
+    while(currentNode.next.next) {
+      currentNode = currentNode.next;
+    } 
+    console.log(currentNode.next)
+    currentNode.next = null;  
+  }
   
-  this.size = 0;
+  //Inspects and returns the items in the list
   this.inspect = function() {
     let outputString = '';
     let currentNode = this.head;
     while(currentNode){
-      outputString += currentNode.value + ' ';
+      if(!currentNode.next){
+        outputString += currentNode.value
+      } else {
+      outputString += currentNode.value + ' -> ';
+      }
       currentNode = currentNode.next;
     }
     console.log(outputString);
@@ -30,10 +68,7 @@ function LinkedList() {
 };
 
 const newList = new LinkedList();
-newList.add(1);
-newList.add(2);
-newList.add(3);
-newList.add(4);
-newList.add(5);
-newList.add(6);
+newList.unshift(4).unshift(2).unshift(1);
+newList.push(5);
+newList.pop();
 console.log(newList.inspect());
